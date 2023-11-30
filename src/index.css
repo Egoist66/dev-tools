@@ -1,0 +1,17 @@
+body,html {
+  box-sizing: border-box;
+  background-color: ghostwhite;
+}
+
+#root {
+  background-color: ghostwhite;
+}
+
+select {
+  max-width: 500px;
+}
+
+h1 {
+  color: deeppink !important;
+  margin-bottom: 50px !important;
+}
