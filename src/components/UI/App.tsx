@@ -1,10 +1,10 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import { selector, useAppDispatch, useAppSelector } from '../store/store';
-import { setEntityMode } from '../store/entities-slice/entities-reducer';
-import { ArrayControls } from './ArrayControls';
-import { ObjectControls } from './ObjectControls';
-import { ClassControls } from './ClassControls';
-import { AppView } from './AppView';
+import { selector, useAppDispatch, useAppSelector } from '../../store/store.ts';
+import { setEntityMode } from '../../store/entities-slice/entities-reducer.ts';
+import { ArrayControls } from '../Service/ArrayControls.tsx';
+import { ObjectControls } from '../Service/ObjectControls.tsx';
+import { ClassControls } from '../Service/ClassControls.tsx';
+import { AppView } from './AppView.tsx';
 
 export const entityOptions = [
 
