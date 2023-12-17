@@ -1,36 +1,34 @@
 import {FC, ReactNode, memo} from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
 import {Form} from "react-bootstrap";
-import {entityOptions} from './App.tsx';
+import {EntityStoreModeValues, EntityStoreOptions} from "../../store/slices/entity-store-mode.ts";
 
 export type AppViewProps = {
-    changeMode: (mode: string) => void
+    changeMode: (mode: EntityStoreModeValues) => void
     showControls: () => ReactNode
+    options: Array<EntityStoreOptions>
     _mode: string
 
 }
 
-export const AppView: FC<AppViewProps> = memo(({changeMode, _mode, showControls}) => {
+export const AppView: FC<AppViewProps> = memo(({options, changeMode, _mode, showControls}) => {
     return (
         <Container className='p-5'>
 
-            <h1 className='display-6 text-center'>Entities Constructor</h1>
+            <h1 className='display-6 text-center fw-semibold'>Entities Generator</h1>
 
             <Row>
                 <Col>
                     <Form.Select data-value={_mode} value={_mode} onChange={(e) => changeMode(e.currentTarget.value)}>
-                        <option>Choose what entity to create</option>
+                        <option disabled>Choose what entity to create</option>
 
-
-                        {entityOptions.map(o => (
-                            <option key={o.id} value={o.id}>{o.entity}</option>
+                        {options.map(o => (
+                            <option key={o.id} value={o.id}>{o.entityName}</option>
                         ))}
 
                     </Form.Select>
                 </Col>
-            </Row>
 
-            <Row>
                 <Col>
 
                     {showControls()}

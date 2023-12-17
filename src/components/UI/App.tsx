@@ -1,61 +1,60 @@
-import { FC, useCallback, useEffect, useState } from 'react';
-import { selector, useAppDispatch, useAppSelector } from '../../store/store.ts';
-import { setEntityMode } from '../../store/entities-slice/entities-reducer.ts';
-import { ArrayControls } from '../Service/ArrayControls.tsx';
-import { ObjectControls } from '../Service/ObjectControls.tsx';
-import { ClassControls } from '../Service/ClassControls.tsx';
-import { AppView } from './AppView.tsx';
-
-export const entityOptions = [
-
-  { id: '1', entity: 'Array' },
-  { id: '2', entity: 'Object' },
-  { id: '3', entity: 'Class' },
-]
+import {FC, memo, useCallback, useEffect} from 'react';
+import {ArrayControls} from '../Service/ArrayControls.tsx';
+import {ObjectControls} from '../Service/ObjectControls.tsx';
+import {ClassControls} from '../Service/ClassControls.tsx';
+import {AppView} from './AppView.tsx';
+import {observer} from "mobx-react";
+import {useRootStore} from "../../store/provider/AppStoreProvider.tsx";
+import {EntityStoreModeValues} from "../../store/slices/entity-store-mode.ts";
 
 
-export const App: FC = () => {
 
-  const dispatch = useAppDispatch()
-  const globalMode = useAppSelector(selector)
+export const App: FC = memo(observer(() => {
 
-  const [_mode, setMode] = useState<string>('')
+  const {entityMode: {setEntityMode, mode, entityOptions}} = useRootStore()
 
-  const changeMode = useCallback((mode: string) => {
+  const changeMode = useCallback((mode: EntityStoreModeValues) => {
 
-    setMode(mode)
+    setEntityMode(mode)
 
-  }, [_mode])
+  }, [mode])
 
   const showControls = useCallback(() => {
 
-    switch (globalMode.mode) {
-      case '1':
+    switch (mode) {
+      case 'Array':
         return <ArrayControls />
-      case '2':
+      case 'Object':
         return <ObjectControls />
-      case '3':
+      case 'Class':
         return <ClassControls />
 
       default:
-        return 'No such value!'
+        return ''
     }
-  }, [globalMode.mode])
+  }, [mode])
 
   useEffect(() => {
-    dispatch(setEntityMode({ mode: _mode }))
-  }, [_mode])
+    if(mode === 'Choose what entity to create'){
+      document.title = 'Entity constructor'
+    }
+    else {
+      document.title = mode + ' mode'
+    }
+
+  }, [mode])
 
   return (
 
     <AppView
-      _mode={_mode}
+      _mode={mode}
+      options={entityOptions}
       showControls={showControls}
       changeMode={changeMode}
     />
 
   )
-}
+}))
 
 
 

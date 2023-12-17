@@ -1,4 +1,4 @@
-body,html {
+body, html {
   box-sizing: border-box;
   background-color: ghostwhite;
 }
@@ -11,7 +11,41 @@ select {
   max-width: 500px;
 }
 
+.tab-content {
+  padding: 30px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px 0px silver;
+}
+
+label {
+  user-select: none !important;
+  cursor: pointer;
+}
+input[type="checkbox"]{
+  cursor: pointer;
+}
+
+.output {
+  padding: 15px;
+  margin-top: 3rem;
+  background: ghostwhite;
+}
+
+select {
+  cursor: pointer;
+}
+
 h1 {
   color: deeppink !important;
   margin-bottom: 50px !important;
+}
+
+button.nav-link {
+  color: deeppink;
+}
+
+button.nav-link:hover {
+  color: deeppink;
+  border-color: transparent !important;
 }
