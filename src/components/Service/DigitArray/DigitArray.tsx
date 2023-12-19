@@ -36,7 +36,6 @@ export const DigitArray: FC = memo(() => {
         digitCount,
         setDigitVarName,
         generateRandom,
-        digitVarName,
         changeDigitsElemsCount,
         generateManualDigitArray,
         setOpen,
@@ -49,7 +48,7 @@ export const DigitArray: FC = memo(() => {
     } = useDigitalArray()
 
     const generateRandomArray = () => {
-        setRandomArray(`${digitVarName} = [${generateRandom()}]`)
+        setRandomArray(`const ${'val_'+ Math.round(Math.random() * 42 + 4)}_rand = [${generateRandom()}]`)
     }
 
 
