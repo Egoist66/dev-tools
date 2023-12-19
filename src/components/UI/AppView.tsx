@@ -1,6 +1,5 @@
-import {FC, ReactNode, memo} from 'react';
-import {Col, Container, Row} from 'react-bootstrap';
-import {Form} from "react-bootstrap";
+import {FC, memo, ReactNode} from 'react';
+import {Col, Container, Form, Row} from 'react-bootstrap';
 import {EntityStoreModeValues, EntityStoreOptions} from "../../store/slices/entity-store-mode.ts";
 
 export type AppViewProps = {

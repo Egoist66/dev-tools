@@ -17,7 +17,7 @@ class EntityStoreMode {
 
 
     @observable
-    mode: EntityStoreModeValues = ''
+    mode: EntityStoreModeValues = 'Array'
 
     constructor() {
         makeAutoObservable(this)

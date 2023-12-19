@@ -36,16 +36,22 @@ select {
   cursor: pointer;
 }
 
+.toast {
+  position: absolute;
+  left: 50px;
+  top: 10px;
+}
+
 h1 {
-  color: deeppink !important;
+  color: #085ED6 !important;
   margin-bottom: 50px !important;
 }
 
 button.nav-link {
-  color: deeppink;
+  color: #085ED6;
 }
 
 button.nav-link:hover {
-  color: deeppink;
+  color: #085ED6;
   border-color: transparent !important;
 }

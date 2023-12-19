@@ -5,13 +5,14 @@ type ArrayContentPropsType = {
     isRandom: boolean
     elemsCount: number
     placeHolder: string
+    onGenerateRandom: () => void
     type: any,
     changeElemsCount: (e: ChangeEvent<HTMLInputElement>) => void
 
 }
 
-export const ArrayRandomContent: FC<ArrayContentPropsType> = memo(({isRandom, placeHolder, type,
-     changeElemsCount,
+export const ArrayRandomContent: FC<ArrayContentPropsType> = memo(({isRandom, elemsCount, placeHolder, type,
+     changeElemsCount, onGenerateRandom
  }) => {
 
 
@@ -28,10 +29,11 @@ export const ArrayRandomContent: FC<ArrayContentPropsType> = memo(({isRandom, pl
                            type={type}
                            min={1}
                            step={1}
-                           defaultValue={3}
+                           value={elemsCount}
+                           max={10}
                        />
 
-                       <Button className={'mt-3'}>Surprise me</Button>
+                       <Button onClick={onGenerateRandom} className={'mt-3'}>Surprise me</Button>
                    </Col>
                 }
 
