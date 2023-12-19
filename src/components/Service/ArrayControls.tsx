@@ -9,7 +9,7 @@ export const ArrayControls: FC = memo(() => {
     return (
 
         <Tabs defaultActiveKey="digital array" className="mb-3">
-            <Tab eventKey="digital array" title="Digital Array">
+            <Tab eventKey="digital array" title="Integer Array">
                 <DigitArray />
             </Tab>
 
