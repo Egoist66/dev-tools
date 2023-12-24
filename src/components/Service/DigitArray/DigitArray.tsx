@@ -1,54 +1,35 @@
-import {FC, memo, useRef, useState} from "react";
+import {FC, memo} from "react";
 import {Button, Col, Row} from "react-bootstrap";
 import {ArraySetup} from "../common/ArraySetup.tsx";
-import {useDigitalArray} from "../../../hooks/useDigitalArray.ts";
+import {useArray} from "../../../hooks/useArray.ts";
 import {UIToast} from "../features/Toast.tsx";
+import {useCopy} from "../../../hooks/useCopy.ts";
 
 
 export const DigitArray: FC = memo(() => {
-    const [isCopied, setCopy] = useState<boolean>(false)
-    const [randomArray, setRandomArray] = useState<string>('')
 
-    const outRef = useRef<HTMLSpanElement>(null)
-    const copyOut = () => {
+    const {setRandomArray, outRef, randomArray, copyOut, isCopied} = useCopy()
 
-        if (outRef.current) {
-            if (window.navigator) {
-                navigator.clipboard.writeText(outRef?.current?.textContent!)
-                    .then(() => {
-                        setCopy(true)
-                        const timer = setTimeout(() => {
-                            setCopy(false)
-                            clearTimeout(timer)
-                        }, 1000)
-                    })
-                    .catch((e) => {
-                        console.log(e)
-                        setCopy(false)
-                    })
-            }
-        }
-    }
 
     const {
-        digitArrOut,
-        digitValues,
-        digitCount,
-        setDigitVarName,
+        arrOut,
+        values,
+        count,
+        setVarName,
         generateRandom,
-        changeDigitsElemsCount,
-        generateManualDigitArray,
+        changeElemsCount,
+        generateManualArray,
         setOpen,
         open,
         toggle,
         isToggled,
         isGenerated,
-        setDigitValues
+        setValues
 
-    } = useDigitalArray()
+    } = useArray()
 
-    const generateRandomArray = () => {
-        setRandomArray(`const ${'val_'+ Math.round(Math.random() * 42 + 4)}_rand = [${generateRandom()}]`)
+    const generateRandomArray = (type: 'int' | 'str') => {
+        setRandomArray(`const ${'val_' + Math.round(Math.random() * 42 + 4)}_rand = [${generateRandom(type)}]`)
     }
 
 
@@ -57,13 +38,13 @@ export const DigitArray: FC = memo(() => {
             <Col>
 
                 <ArraySetup
-                    onSetVarName={setDigitVarName}
-                    onSetValues={setDigitValues}
-                    onGenerateArray={generateManualDigitArray}
-                    onGenerateRandom={generateRandomArray}
-                    onChangeValuesCount={changeDigitsElemsCount}
-                    values={digitValues}
-                    valuesCount={digitCount}
+                    onSetVarName={setVarName}
+                    onSetValues={setValues}
+                    onGenerateArray={() =>generateManualArray(true)}
+                    onGenerateRandom={() => generateRandomArray('int')}
+                    onChangeValuesCount={changeElemsCount}
+                    values={values}
+                    valuesCount={count}
                     isToggled={isToggled}
                     toggle={toggle}
 
@@ -81,7 +62,7 @@ export const DigitArray: FC = memo(() => {
 
                 <Row style={{alignItems: 'center', justifyContent: 'space-between'}} className={'output mt-5'}>
                     <Col>
-                        {!isToggled ? <span ref={outRef} id={'out'}>{!digitArrOut.length ? `[ ]` : digitArrOut}</span> :
+                        {!isToggled ? <span ref={outRef} id={'out'}>{!arrOut.length ? `[ ]` : arrOut}</span> :
                             <span ref={outRef}>{randomArray}</span>
                         }
                     </Col>

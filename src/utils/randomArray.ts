@@ -6,3 +6,17 @@ export function generateRandomArray(count: number) {
     }
     return randomArray;
 }
+
+export function generateRandomStringArray(count: number) {
+    const array = [];
+
+    // Генерируем случайное количество строк
+
+    // Заполняем массив случайными строками
+    for (let i = 0; i < count; i++) {
+        const randomString = Math.random().toString(36).substring(7);
+        array.push(`\`${randomString}\``);
+    }
+
+    return array;
+}

@@ -1,4 +1,4 @@
-import {ChangeEvent, FC, memo} from "react";
+import {ChangeEvent, FC, memo, useId} from "react";
 import {Button, Col, Form} from "react-bootstrap";
 import {ArrayRandomContent} from "./ArrayContent.tsx";
 
@@ -16,6 +16,7 @@ type ArraySetupProps = {
     toggle: () => void
 }
 export const ArraySetup: FC<ArraySetupProps> = memo(({
+
     onSetVarName,
     onSetValues,
     onGenerateArray,
@@ -26,12 +27,15 @@ export const ArraySetup: FC<ArraySetupProps> = memo(({
     values,
     valuesCount,
  }) => {
+
+    const id = useId()
+
     return (
         <>
 
             <datalist id="myList">
-                <option value="[1, 2, 3, 4]"/>
-                <option value="['a', 'b', 'c']"/>
+                <option value="1 2 3 4"/>
+                <option value="'a' 'b' 'c'"/>
 
             </datalist>
 
@@ -73,7 +77,7 @@ export const ArraySetup: FC<ArraySetupProps> = memo(({
                     data-checked={isToggled}
                     label={'Make random?'}
                     checked={isToggled}
-                    id={'random-checkbox'}
+                    id={id}
                 />
 
                 <ArrayRandomContent

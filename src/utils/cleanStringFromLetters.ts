@@ -12,3 +12,14 @@ export function removeLettersFromArray(array: any[]) {
     });
     return cleanedArray;
 }
+
+export function replaceNumbersWithS(array: any[]) {
+    const resultArray = array.map(item => {
+        if (typeof item === 'string') {
+            return item.replace(/\d+/g, 's');
+        }
+        return item;
+    });
+
+    return resultArray;
+}
