@@ -8,12 +8,14 @@ import {useCopy} from "../../../hooks/useCopy.ts";
 
 export const StringArray: FC = memo(() => {
 
-    const {outRef, setRandomArray, randomArray, copyOut, isCopied} = useCopy()
+    const {outRef, copyOut, isCopied} = useCopy()
     const {
         arrOut,
         values,
         count,
         setVarName,
+        setRandomArray,
+        randomArray,
         changeElemsCount,
         generateManualArray,
         setOpen,

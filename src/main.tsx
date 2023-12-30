@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {AppStoreProvider} from "./store/provider/AppStoreProvider.tsx";
 import {store} from "./store/store.ts";
 import {spy} from "mobx";
+import {injectStores} from "@mobx-devtools/tools";
 
 
 spy((e) => {
@@ -12,6 +13,10 @@ spy((e) => {
         console.log(e)
     }
 })
+
+injectStores({
+    store
+});
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <AppStoreProvider store={store}>

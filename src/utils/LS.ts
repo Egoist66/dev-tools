@@ -1,10 +1,10 @@
 export const toLS = {
-    saveState(context: any) {
-        localStorage.setItem("root", JSON.stringify(context));
+    saveState(key: string, context: any) {
+        localStorage.setItem(key, JSON.stringify(context));
     },
 
-    loadState(afterInit: (parsedData: any) => void) {
-        const savedState = localStorage.getItem("root");
+    loadState(key: string, afterInit: (parsedData: any) => void) {
+        const savedState = localStorage.getItem(key);
         if (savedState) {
             const parsedState = JSON.parse(savedState);
             afterInit(parsedState)

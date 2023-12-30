@@ -14,7 +14,7 @@ export const AppView: FC<AppViewProps> = memo(({options, changeMode, _mode, show
     return (
         <Container className='p-5'>
 
-            <h1 className='display-6 text-center fw-semibold'>Entities Generator</h1>
+            <h1 className='display-6 fw-semibold'>Entities Generator</h1>
 
             <Row>
                 <Col>

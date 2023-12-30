@@ -21,8 +21,8 @@ class EntityStoreMode {
 
     constructor() {
         makeAutoObservable(this)
-        toLS.loadState((parsedData) => {
-            this.mode = parsedData.mode
+        toLS.loadState('mode',(parsedData) => {
+            this.mode = parsedData
 
         })
 
@@ -31,7 +31,7 @@ class EntityStoreMode {
     @action
     setEntityMode = (mode: EntityStoreModeValues) => {
         this.mode = mode
-        toLS.saveState(this)
+        toLS.saveState('mode', this.mode)
     }
 }
 

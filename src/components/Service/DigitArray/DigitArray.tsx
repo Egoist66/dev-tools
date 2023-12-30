@@ -8,7 +8,7 @@ import {useCopy} from "../../../hooks/useCopy.ts";
 
 export const DigitArray: FC = memo(() => {
 
-    const {setRandomArray, outRef, randomArray, copyOut, isCopied} = useCopy()
+    const {outRef, copyOut, isCopied} = useCopy()
 
 
     const {
@@ -18,6 +18,8 @@ export const DigitArray: FC = memo(() => {
         setVarName,
         generateRandom,
         changeElemsCount,
+        randomArray,
+        setRandomArray,
         generateManualArray,
         setOpen,
         open,

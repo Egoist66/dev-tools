@@ -14,6 +14,8 @@ type DigitArrayState = {
 export const useArray = () => {
     const {toggle, setToggleOnce, isToggled} = useToggle()
     const [open, setOpen] = useState<boolean>(true)
+    const [randomArray, setRandomArray] = useState<string>('')
+
 
     const [arrayData, setArrayData] = useState<DigitArrayState>({
         count: 3,
@@ -95,6 +97,8 @@ export const useArray = () => {
         generateRandom,
         toggle,
         isToggled,
+        randomArray,
+        setRandomArray,
         setOpen,
         open,
         ...arrayData

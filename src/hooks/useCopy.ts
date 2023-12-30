@@ -2,7 +2,6 @@ import {useRef, useState} from "react";
 
 export const useCopy = () => {
     const [isCopied, setCopy] = useState<boolean>(false)
-    const [randomArray, setRandomArray] = useState<string>('')
 
     const outRef = useRef<HTMLSpanElement>(null)
     const copyOut = () => {
@@ -26,8 +25,7 @@ export const useCopy = () => {
     }
 
     return {
-        randomArray,
-        setRandomArray,
+
         copyOut,
         outRef,
         isCopied

@@ -1,10 +1,12 @@
 import {createContext, FC, ReactNode, useContext} from "react";
 import {entitySlice} from "../slices/entity-store-mode.ts";
 import {store} from "../store.ts";
+import {entityObjectSlice} from "../slices/entity-store-object.ts";
 
 interface StoreContextValue {
 
     entityMode: typeof entitySlice
+    entityStoreObject: typeof entityObjectSlice
 
 }
 const StoreContext = createContext<StoreContextValue | null>(null)
