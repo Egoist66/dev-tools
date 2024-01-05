@@ -22,6 +22,7 @@ class EntityStoreObject implements EntityInputs{
 
     @action
     addInput = () => {
+
         this.inputs = [...this.inputs, {key: '', value: ''}];
     };
 

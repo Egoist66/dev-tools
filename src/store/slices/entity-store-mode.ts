@@ -1,7 +1,7 @@
 import {action, makeAutoObservable, observable} from "mobx";
 import {toLS} from "../../utils/LS.ts";
 
-export type EntityStoreModeValues = 'Array' | 'Object' | 'Class' | '' | string
+export type EntityStoreModeValues = 'Array' | 'Object' | '' | string
 export type EntityStoreOptions = {
     id: string,
     entityName: string
@@ -12,7 +12,6 @@ class EntityStoreMode {
 
         { id: 'Array', entityName: 'Array' },
         { id: 'Object', entityName: 'Object' },
-        { id: 'Class', entityName: 'Class' },
     ]
 
 

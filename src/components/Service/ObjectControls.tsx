@@ -11,6 +11,8 @@ export const ObjectControls: FC = observer(() => {
     const {outRef, copyOut, isCopied} = useCopy()
     const [isEditable, setEditable] = useState<boolean>(false)
 
+    const [inputCount, setInputsCount] = useState<number>(0)
+
     const switchEditable = () => {
         setEditable(isEditable => !isEditable)
 
@@ -31,6 +33,13 @@ export const ObjectControls: FC = observer(() => {
                 data
             }
     } = useRootStore()
+
+
+    useEffect(() => {
+            if (inputs.length >= 2){
+                setInputsCount(inputCount => inputCount + 1)
+            }
+    }, [inputs.length]);
     return (
 
 
@@ -41,7 +50,7 @@ export const ObjectControls: FC = observer(() => {
                     display: "flex",
                     alignItems: 'baseline'
                 }}>
-                    <Button variant={'outline-primary'} onClick={addInput}>Add input</Button>
+                    <Button  variant={'outline-primary'} onClick={addInput}>Add input</Button>
                 </Col>
                 <Row>
                     <ul style={{listStyle: "none"}} ref={listRef}>
@@ -73,7 +82,7 @@ export const ObjectControls: FC = observer(() => {
                     <Col style={{textAlign: 'right'}}  lg={'2'}>
                         <Button onClick={copyOut} variant={'outline-secondary'}>{isCopied ? 'Copied!': 'Copy'}</Button>
                     </Col>
-                    <Button onClick={handleGenerateJson}>Generate</Button>
+                    <Button disabled={!inputs[inputCount].key || !inputs[inputCount].value} onClick={handleGenerateJson}>Generate</Button>
 
                 </Col>
             </Row>

@@ -11,6 +11,11 @@ select {
   max-width: 500px;
 }
 
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
 .tab-content {
   padding: 30px;
   background: white;
