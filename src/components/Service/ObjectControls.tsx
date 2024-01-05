@@ -18,6 +18,13 @@ export const ObjectControls: FC = observer(() => {
 
     }
 
+    const reduceInputIndex = (index: number) => {
+        if (inputCount <= 0){
+            return;
+        }
+        setInputsCount(inputCount => inputCount - index)
+    }
+
     useEffect(() => {
         if (isEditable){
             outRef?.current?.focus()
@@ -36,12 +43,16 @@ export const ObjectControls: FC = observer(() => {
 
 
     useEffect(() => {
-            if (inputs.length >= 2){
+            if (inputs.length > 1){
                 setInputsCount(inputCount => inputCount + 1)
             }
-    }, [inputs.length]);
-    return (
 
+        console.log(inputs[inputCount])
+    }, [inputs.length]);
+
+    console.log(inputCount)
+
+    return (
 
             <Row>
 
@@ -56,7 +67,11 @@ export const ObjectControls: FC = observer(() => {
                     <ul style={{listStyle: "none"}} ref={listRef}>
                         {inputs.map((input, index) => (
 
-                            <ObjectItem key={index} input={input} index={index}/>
+                            <ObjectItem
+                                key={index}
+                                reduceInputIndex={reduceInputIndex}
+                                input={input}
+                                index={index}/>
 
                         ))}
                     </ul>
@@ -82,9 +97,13 @@ export const ObjectControls: FC = observer(() => {
                     <Col style={{textAlign: 'right'}}  lg={'2'}>
                         <Button onClick={copyOut} variant={'outline-secondary'}>{isCopied ? 'Copied!': 'Copy'}</Button>
                     </Col>
-                    <Button disabled={!inputs[inputCount].key || !inputs[inputCount].value} onClick={handleGenerateJson}>Generate</Button>
+                    <Button disabled={inputs.length <= 0 ? true : !inputs[inputCount]?.key.length || !inputs[inputCount]?.value.length} onClick={handleGenerateJson}>Generate</Button>
 
                 </Col>
+
+
+                {inputCount}
+
             </Row>
 
     )

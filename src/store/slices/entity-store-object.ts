@@ -27,9 +27,13 @@ class EntityStoreObject implements EntityInputs{
     };
 
     @action
-    removeInput = (index: number, key: string) => {
+    removeInput = (index: number, key: string, callback: () => void) => {
+        this.inputs = this.inputs.filter((_, i) => {
+            return i !== index
+        })
 
-        this.inputs = this.inputs.filter((_, i) => i !== index)
+        callback()
+
         // @ts-ignore
         delete this.data[key]
 

@@ -4,9 +4,10 @@ import {useRootStore} from "../../../store/provider/AppStoreProvider.tsx";
 
 type ObjectItemProps = {
     input: { key: string, value: string }
+    reduceInputIndex: (index: number) => void
     index: number
 }
-export const ObjectItem: FC<ObjectItemProps> = memo(({input, index}) => {
+export const ObjectItem: FC<ObjectItemProps> = memo(({input, reduceInputIndex, index}) => {
     const {
         entityStoreObject: {
 
@@ -16,7 +17,7 @@ export const ObjectItem: FC<ObjectItemProps> = memo(({input, index}) => {
     } = useRootStore()
     return (
 
-        <li>
+        <li data-index={index}>
             <Row>
                 <Col style={{
                     display: 'flex',
@@ -35,12 +36,22 @@ export const ObjectItem: FC<ObjectItemProps> = memo(({input, index}) => {
                         placeholder="Value"
                         onChange={(e) => handleChange(index, input.key, e.target.value)}
                     />
-                    <Button variant={'outline-danger'}
-                            onClick={() => removeInput(index, input.key)}>
+                    <Button data-index={index} variant={'outline-danger'}
+                            onClick={() => {
+
+                                removeInput(index, input.key, () => {
+                                    reduceInputIndex(1)
+                                })
+
+
+
+
+
+                            }}>
                         Remove input
                     </Button>
 
-
+                    {index}
                 </Col>
             </Row>
         </li>
