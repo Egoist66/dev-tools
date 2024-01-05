@@ -11,18 +11,10 @@ export const ObjectControls: FC = observer(() => {
     const {outRef, copyOut, isCopied} = useCopy()
     const [isEditable, setEditable] = useState<boolean>(false)
 
-    const [inputCount, setInputsCount] = useState<number>(0)
 
     const switchEditable = () => {
         setEditable(isEditable => !isEditable)
 
-    }
-
-    const reduceInputIndex = (index: number) => {
-        if (inputCount <= 0){
-            return;
-        }
-        setInputsCount(inputCount => inputCount - index)
     }
 
     useEffect(() => {
@@ -37,20 +29,19 @@ export const ObjectControls: FC = observer(() => {
                 handleGenerateJson,
                 addInput,
                 inputs,
+                inputCount,
                 data
             }
     } = useRootStore()
 
+    const isBtnDisabled = () => {
+        if (!inputs[inputCount]?.key.length || !inputs[inputCount]?.value.length ){
+            return true
+        }
 
-    useEffect(() => {
-            if (inputs.length > 1){
-                setInputsCount(inputCount => inputCount + 1)
-            }
 
-        console.log(inputs[inputCount])
-    }, [inputs.length]);
+    }
 
-    console.log(inputCount)
 
     return (
 
@@ -69,7 +60,6 @@ export const ObjectControls: FC = observer(() => {
 
                             <ObjectItem
                                 key={index}
-                                reduceInputIndex={reduceInputIndex}
                                 input={input}
                                 index={index}/>
 
@@ -97,12 +87,11 @@ export const ObjectControls: FC = observer(() => {
                     <Col style={{textAlign: 'right'}}  lg={'2'}>
                         <Button onClick={copyOut} variant={'outline-secondary'}>{isCopied ? 'Copied!': 'Copy'}</Button>
                     </Col>
-                    <Button disabled={inputs.length <= 0 ? true : !inputs[inputCount]?.key.length || !inputs[inputCount]?.value.length} onClick={handleGenerateJson}>Generate</Button>
+                    <Button disabled={isBtnDisabled()} onClick={handleGenerateJson}>Generate</Button>
 
                 </Col>
 
 
-                {inputCount}
 
             </Row>
 
